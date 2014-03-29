@@ -12,13 +12,21 @@ public class Movement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		gamePieceArray pieces = (gamePieceArray)GameObject.Find("Grid").gameObject.GetComponent("gamePieceArray");
+		pieces.array [3, 0] = 1; 
 		counter += Time.deltaTime;
 		//gamePieceArray array = GameObject.Find("Grid").GetComponent<gamePieceArray>();
+		if (Input.GetKey ("space")) {
+			for(int i=0; i<4; i++){
+				Debug.Log(i+":"+array[i,0]+","+array[i,1]+","+array[i,2]+","+array[i,3]);
+			}
+		}
 		if (counter >0.1f){
 			if (Input.GetKey("up")){
 				//if (transform.position.y<=4.5){
 					transform.position=new Vector3(transform.position.x,11.75f, transform.position.z);
 					counter=0;
+					//GameObject gamePiece =(GameObject) Instantiate(spawnObject, new Vector3(-5.25f,1.25f,5f), Quaternion.identity);  
 					//updateArray();
 				//}
 			}
@@ -42,11 +50,11 @@ public class Movement : MonoBehaviour {
 			}
 		}
 	}
-	void updateArray(int vert, int hort){
+	/*void updateArray(int vert, int hort){
 		gamePieceArray grid = GameObject.Find("Grid").GetComponent<gamePieceArray>();
 		grid.array [hort, vert] = 1;
 		Debug.Log ("This worked");
-	}
+	}*/
 
 }
 
