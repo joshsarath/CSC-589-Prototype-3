@@ -24,9 +24,8 @@ public class Movement : MonoBehaviour {
 		if (counter >0.1f){
 			if (Input.GetKey("up")){
 				if (transform.position.y<=3.5){
-					transform.position=new Vector3(transform.position.x,11.75f, transform.position.z);
-					counter=0;
 					updateArrayUp(pieces);
+					counter=0;
 				}
 			}
 			if (Input.GetKey("down")){
@@ -49,6 +48,14 @@ public class Movement : MonoBehaviour {
 			}
 		}
 	}
+	int computePositionVert(){
+		int value = (int)((transform.position.x + 5.25) / 3.5);
+		return value;
+	}
+	int computePostionHort(){
+		int value = (int)(3 - (transform.position.y - 1.25) / 3.5);
+		return value;
+	}
 	void updateArrayUp(gamePieceArray pieces){
 		/* int i=((position.x+5.25)/3.5)
 		 * int j=((poistion.y-1.75)/3.5)
@@ -57,27 +64,31 @@ public class Movement : MonoBehaviour {
 		 * if position above == self==> combime()
 		 * while position above!= self move to j+1
 		 */
-		double i = ((transform.position.x + 5.25) / 3.5);
-		double j = (3-(transform.position.y - 1.25) / 3.5);
-		int column= (int)i;
-		int row=(int)j;
-		while (pieces.array[row,column-1]==0) {
-			transform.position= transform.position + new Vector3(0,3.5f, 0); 
-			pieces.array[row,column-1]=1;
-			pieces.array[row,column]=0;
-			column--;
+
+		int column = computePositionVert ();
+		int row = computePostionHort ();
+		if (row>0){//make sure not on top row
+			if (0==pieces.array[row-1,column]){//tests for a piece above itself 
+				//if equals 0, pieces moves up 3.5, updates array, and calls updateArrayUp again
+				pieces.array[row,column]=0;
+				transform.position= transform.position + new Vector3(0,3.5f, 0);
+				Debug.Log("Up Once");
+				pieces.array[row-1,column]=1;
+				updateArrayUp(pieces);
+			}
+			if (pieces.array [row-1, column] == pieces.array [row, column]) {
+				combinePiecesUp (pieces, column, row);		
+			}
+			//if (pieces.array [row, column - 1] != pieces.array [row, column]) {
+						
+			//}
 		}
-		if (pieces.array [row, column - 1] == pieces.array [row, column]) {
-			combinePiecesUp(pieces, column, row);		
-		}
-		//if (pieces.array [row, column - 1] != pieces.array [row, column]) {
-					
-		//}
 	}
 	void combinePiecesUp(gamePieceArray pieces, int column, int row){
-		pieces.array [row, column - 1] *= 2;
-		Instantiate (spawnObject, new Vector3(-5.25f,1.25f,5f), Quaternion.identity);
-		Destroy (this);
+		pieces.array [row-1, column] *= 2;
+		//Instantiate (spawnObject, new Vector3(-5.25f,1.25f,5f), Quaternion.identity);
+		Destroy (GameObject.Find("testGamePiece(clone)"));
+		Debug.Log ("Destroyed");
 	}
 
 }

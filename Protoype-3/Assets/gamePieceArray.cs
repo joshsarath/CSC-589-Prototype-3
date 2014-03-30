@@ -3,6 +3,7 @@ using System.Collections;
 
 public class gamePieceArray : MonoBehaviour {
 	public int[,] array= new int[4,4];
+	private float counter=0;
 
 	public  GameObject spawnObject;
 
@@ -22,8 +23,12 @@ public class gamePieceArray : MonoBehaviour {
 			
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKey("up")||Input.GetKey("down")||Input.GetKey("left")||Input.GetKey("right")){
-			Instantiate(spawnObject, new Vector3(-5.25f,1.25f,5f), Quaternion.identity); 
+		counter += Time.deltaTime;
+		if (counter > 2f) {
+			if (Input.GetKey ("up") || Input.GetKey ("down") || Input.GetKey ("left") || Input.GetKey ("right")) {
+				Instantiate (spawnObject, new Vector3 (-5.25f, 1.25f, 5f), Quaternion.identity); 
+				counter=0;
+			}
 		}
 	}
 }
