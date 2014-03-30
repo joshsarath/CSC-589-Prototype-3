@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Movement : MonoBehaviour {
 	private float counter=0;
-
+	public GameObject spawnObject;
 
 	// Use this for initialization
 	void Start () {
@@ -18,20 +18,19 @@ public class Movement : MonoBehaviour {
 		//gamePieceArray array = GameObject.Find("Grid").GetComponent<gamePieceArray>();
 		if (Input.GetKey ("space")) {
 			for(int i=0; i<4; i++){
-				Debug.Log(i+":"+array[i,0]+","+array[i,1]+","+array[i,2]+","+array[i,3]);
+				Debug.Log(i+":"+pieces.array[i,0]+","+pieces.array[i,1]+","+pieces.array[i,2]+","+pieces.array[i,3]);
 			}
 		}
 		if (counter >0.1f){
 			if (Input.GetKey("up")){
-				//if (transform.position.y<=4.5){
+				if (transform.position.y<=3.5){
 					transform.position=new Vector3(transform.position.x,11.75f, transform.position.z);
 					counter=0;
-					//GameObject gamePiece =(GameObject) Instantiate(spawnObject, new Vector3(-5.25f,1.25f,5f), Quaternion.identity);  
-					//updateArray();
-				//}
+					updateArrayUp(pieces);
+				}
 			}
 			if (Input.GetKey("down")){
-				if (transform.position.y>=-2.5){
+				if (transform.position.y>=-3.5){
 					transform.position=new Vector3(transform.position.x,1.25f,transform.position.z);
 					counter=0;
 				}
@@ -50,11 +49,36 @@ public class Movement : MonoBehaviour {
 			}
 		}
 	}
-	/*void updateArray(int vert, int hort){
-		gamePieceArray grid = GameObject.Find("Grid").GetComponent<gamePieceArray>();
-		grid.array [hort, vert] = 1;
-		Debug.Log ("This worked");
-	}*/
+	void updateArrayUp(gamePieceArray pieces){
+		/* int i=((position.x+5.25)/3.5)
+		 * int j=((poistion.y-1.75)/3.5)
+		 * 		test each vertical of array pieces.array[i,3]&&[i,2]&&[i,1]&&[i,3]
+		 * if all empty= new position equals top
+		 * if position above == self==> combime()
+		 * while position above!= self move to j+1
+		 */
+		double i = ((transform.position.x + 5.25) / 3.5);
+		double j = (3-(transform.position.y - 1.25) / 3.5);
+		int column= (int)i;
+		int row=(int)j;
+		while (pieces.array[row,column-1]==0) {
+			transform.position= transform.position + new Vector3(0,3.5f, 0); 
+			pieces.array[row,column-1]=1;
+			pieces.array[row,column]=0;
+			column--;
+		}
+		if (pieces.array [row, column - 1] == pieces.array [row, column]) {
+			combinePiecesUp(pieces, column, row);		
+		}
+		//if (pieces.array [row, column - 1] != pieces.array [row, column]) {
+					
+		//}
+	}
+	void combinePiecesUp(gamePieceArray pieces, int column, int row){
+		pieces.array [row, column - 1] *= 2;
+		Instantiate (spawnObject, new Vector3(-5.25f,1.25f,5f), Quaternion.identity);
+		Destroy (this);
+	}
 
 }
 
