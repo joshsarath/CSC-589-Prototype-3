@@ -3,7 +3,7 @@ using System.Collections;
 
 public class gamePieceArray : MonoBehaviour {
 	public int[,] array= new int[4,4];
-	private float counter=0;
+	public float counter=0;
 
 	public  GameObject spawnObject;
 

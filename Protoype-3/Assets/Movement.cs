@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Movement : MonoBehaviour {
-	private float counter=0;
+
 	public GameObject spawnObject;
 
 	// Use this for initialization
@@ -14,36 +14,38 @@ public class Movement : MonoBehaviour {
 	void Update () {
 		gamePieceArray pieces = (gamePieceArray)GameObject.Find("Grid").gameObject.GetComponent("gamePieceArray");
 		pieces.array [3, 0] = 1; 
-		counter += Time.deltaTime;
+		pieces.counter += Time.deltaTime;
 		//gamePieceArray array = GameObject.Find("Grid").GetComponent<gamePieceArray>();
-		if (Input.GetKey ("space")) {
-			for(int i=0; i<4; i++){
-				Debug.Log(i+":"+pieces.array[i,0]+","+pieces.array[i,1]+","+pieces.array[i,2]+","+pieces.array[i,3]);
+	
+		if (pieces.counter >2f){
+			if (Input.GetKey ("space")) {
+				for(int i=0; i<4; i++){
+					Debug.Log(i+":"+pieces.array[i,0]+","+pieces.array[i,1]+","+pieces.array[i,2]+","+pieces.array[i,3]);
+				}
 			}
-		}
-		if (counter >0.1f){
 			if (Input.GetKey("up")){
 				if (transform.position.y<=3.5){
 					updateArrayUp(pieces);
-					counter=0;
+					pieces.counter=0;
+					Debug.Log ("UP");
 				}
 			}
 			if (Input.GetKey("down")){
 				if (transform.position.y>=-3.5){
 					transform.position=new Vector3(transform.position.x,1.25f,transform.position.z);
-					counter=0;
+					pieces.counter=0;
 				}
 			}
 			if (Input.GetKey("left")){
 				if (transform.position.x>=-3.5){
 					transform.position=new Vector3(-5.25f,transform.position.y,transform.position.z);
-					counter=0;
+					pieces.counter=0;
 				}
 			}
 			if (Input.GetKey("right")){
 				if (transform.position.x<=3.5){
 					transform.position=new Vector3(5.25f,transform.position.y,transform.position.z);
-					counter=0;
+					pieces.counter=0;
 				}
 			}
 		}
@@ -72,7 +74,7 @@ public class Movement : MonoBehaviour {
 				//if equals 0, pieces moves up 3.5, updates array, and calls updateArrayUp again
 				pieces.array[row,column]=0;
 				transform.position= transform.position + new Vector3(0,3.5f, 0);
-				Debug.Log("Up Once");
+				//Debug.Log("Up Once");
 				pieces.array[row-1,column]=1;
 				updateArrayUp(pieces);
 			}
