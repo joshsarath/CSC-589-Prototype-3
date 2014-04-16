@@ -23,8 +23,18 @@ public class Game : MonoBehaviour {
 		 * 		else (xspeed,yspeed=0;
 		 * 
 		 */
-		upspeed = 0f;
-		Debug.Log ("collided");
+		Debug.Log ("hit");
+		if (other.name == "Wall") {
+			upspeed=0;
+			sidespeed=0;
+		}
+		/*
+		 * if other.name == piece(clone)
+		 * if tag==tag of self
+		 * 		new tag=tag*2
+		 * 		new material
+		 * 		Destroy(gameObject.other)
+		 */ 
 
 	}
 }

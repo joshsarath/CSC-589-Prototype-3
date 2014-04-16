@@ -10,11 +10,12 @@ public class StopObject : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
-	void OnTriggerEnter(Collider other){
-		Game piece = other.GetComponent<Game> ();
-		piece.upspeed = 0f;
-		piece.sidespeed = 0f;
+	void OnTriggerEnter (Collider other){
+		Debug.Log ("stuff");
+		Game piece = other.gameObject.GetComponent<Game> ();
+		piece.upspeed = 0;
+		piece.sidespeed = 0;
 	}
 }

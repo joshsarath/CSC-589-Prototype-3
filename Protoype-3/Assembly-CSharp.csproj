@@ -48,9 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Game.cs" />
      <Compile Include="Assets\Move.cs" />
-     <Compile Include="Assets\Movement.cs" />
      <Compile Include="Assets\StopObject.cs" />
-     <Compile Include="Assets\gamePieceArray.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">

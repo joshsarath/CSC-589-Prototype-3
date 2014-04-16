@@ -4,8 +4,6 @@ using System.Collections;
 public class Move : MonoBehaviour {
 
 	public GameObject piece;
-	private float time=0;
-	private float timeDelay=3f;
 
 	// Use this for initialization
 	void Start () {
@@ -14,19 +12,43 @@ public class Move : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//if (time==0){
+		/*i will put a timer that will freeze out until all movement is finished.
+		 * All movement will be within an if statement testing if timer ==0
+		 * after a keypress timer = 1
+		 * movement process will go and at end of procedure timer =0
+		 */
 			if (Input.GetKey ("up")) {
-				//Debug.Log ("poop");
-				time=timeDelay;
 				foreach(GameObject go in GameObject.FindGameObjectsWithTag("Piece")) {
 					Game piece= GameObject.Find (go.name).GetComponent<Game>();
-					Debug.Log("worked");
-					if (piece.transform.position.y<14){
+					if (piece.transform.position.y<11){
 						piece.upspeed=.5f;
 					}
 				}
 			}
-		//}
-		//time -= Time.deltaTime;
+		if (Input.GetKey ("down")) {
+			foreach(GameObject go in GameObject.FindGameObjectsWithTag("Piece")) {
+				Game piece= GameObject.Find (go.name).GetComponent<Game>();
+				if (piece.transform.position.y>3){
+					piece.upspeed=-.5f;
+				}
+			}
+		}
+		if (Input.GetKey ("right")) {
+			foreach(GameObject go in GameObject.FindGameObjectsWithTag("Piece")) {
+				Game piece= GameObject.Find (go.name).GetComponent<Game>();
+				if (piece.transform.position.x<5){
+					piece.sidespeed=.5f;
+				}
+			}
+		}
+		if (Input.GetKey ("left")) {
+			foreach(GameObject go in GameObject.FindGameObjectsWithTag("Piece")) {
+				Game piece= GameObject.Find (go.name).GetComponent<Game>();
+				if (piece.transform.position.x>-4){
+					piece.sidespeed=-.5f;
+				}
+			}
+		}
+	
 	}
 }
