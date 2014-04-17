@@ -48,7 +48,6 @@
   <ItemGroup>
      <Compile Include="Assets\Game.cs" />
      <Compile Include="Assets\Move.cs" />
-     <Compile Include="Assets\StopObject.cs" />
  <Reference Include="Library\ScriptAssemblies\Assembly-UnityScript-firstpass">
  <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>

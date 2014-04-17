@@ -1,9 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../../CSC-589-FinalProject/FinalProject/Assets/SnakeMovement.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Game.cs">
     <Files>
-      <File FileName="../../CSC-589-FinalProject/FinalProject/Assets/SnakeMovement.cs" Line="78" Column="30" />
-      <File FileName="../../CSC-589-FinalProject/FinalProject/Assets/StartSnake.cs" Line="7" Column="25" />
+      <File FileName="Assets/Game.cs" Line="26" Column="6" />
+      <File FileName="Assets/Move.cs" Line="30" Column="5" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
